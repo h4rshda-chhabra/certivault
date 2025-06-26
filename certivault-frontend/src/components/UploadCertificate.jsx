@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './VerifyCertificates.css'; // Reuse same styles
+import './VerifyCertificates.css';
 
 const UploadCertificate = () => {
   const [formData, setFormData] = useState({
     certificateId: '',
     studentName: '',
     courseName: '',
-    issueDate: '',
-    organization: ''
+    issueDate: ''
   });
   const [message, setMessage] = useState('');
 
@@ -21,7 +20,10 @@ const UploadCertificate = () => {
     try {
       const response = await fetch('http://localhost:5000/api/certificates/upload', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         body: JSON.stringify(formData)
       });
 
@@ -32,8 +34,7 @@ const UploadCertificate = () => {
           certificateId: '',
           studentName: '',
           courseName: '',
-          issueDate: '',
-          organization: ''
+          issueDate: ''
         });
       } else {
         setMessage(data.message || 'Something went wrong');
@@ -46,7 +47,6 @@ const UploadCertificate = () => {
 
   return (
     <>
-      {/* Navbar */}
       <nav className="navbar">
         <h1 className="logo">CertifyHub</h1>
         <div className="nav-links">
@@ -56,12 +56,10 @@ const UploadCertificate = () => {
         </div>
       </nav>
 
-    
-      {/* Upload Form */}
       <section id="upload" className="verify-section">
         <h2 className="text-2xl font-bold mb-4 text-center">Upload Certificate</h2>
         <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
-          {['certificateId', 'studentName', 'courseName', 'issueDate', 'organization'].map((field) => (
+          {['certificateId', 'studentName', 'courseName', 'issueDate'].map((field) => (
             <input
               key={field}
               type={field === 'issueDate' ? 'date' : 'text'}
@@ -83,16 +81,6 @@ const UploadCertificate = () => {
         )}
       </section>
 
-      {/* CTA for Admins */}
-      <section className="admin-cta">
-        <p>Want to manage more certificates?</p>
-        <div className="admin-buttons">
-          <a href="/admin/login" className="btn btn-primary">Log In</a>
-          <a href="/admin/signup" className="btn btn-outline">Sign Up</a>
-        </div>
-      </section>
-
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} CertifyHub. All rights reserved.</p>
       </footer>

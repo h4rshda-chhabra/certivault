@@ -1,4 +1,3 @@
-// Placeholder for JWT auth middleware
 const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {

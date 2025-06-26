@@ -5,12 +5,23 @@ const path = require('path');
 
 exports.uploadCertificate = async (req, res) => {
   try {
-    const { certificateId, studentName, courseName, issueDate, organization } = req.body;
+    const { certificateId, studentName, courseName, issueDate } = req.body;
+
+    if (!req.user?.orgId) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
 
     const exists = await Certificate.findOne({ certificateId });
     if (exists) return res.status(400).json({ message: 'Certificate ID already exists' });
 
-    const cert = new Certificate({ certificateId, studentName, courseName, issueDate, organization });
+    const cert = new Certificate({
+      certificateId,
+      studentName,
+      courseName,
+      issueDate,
+      organization: req.user.orgId,
+    });
+
     await cert.save();
 
     res.status(201).json({ message: 'Certificate uploaded successfully' });
@@ -34,7 +45,7 @@ exports.bulkUpload = (req, res) => {
         if (exists) {
           duplicates.push(row);
         } else {
-          results.push(row);
+          results.push({ ...row, organization: req.user?.orgId });
         }
       } catch (err) {
         errors.push({ row, error: err.message });
