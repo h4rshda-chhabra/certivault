@@ -1,18 +1,22 @@
-/* App.css */
-
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
-body {
+html, body {
+  height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #3f62a7, #1e3a8a);
   color: #333;
-    height: 100vh;
+}
 
+/* Layout */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Navbar */
@@ -23,10 +27,6 @@ body {
   padding: 1rem 3rem;
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .logo {
@@ -40,38 +40,63 @@ body {
   margin-left: 1.5rem;
   text-decoration: none;
   font-weight: 500;
-  transition: opacity 0.3s ease;
 }
 
 .nav-links a:hover {
   opacity: 0.8;
 }
 
-/* Hero */
-.hero {
-  background: url('https://picsum.photos/seed/certifyhub/1200/400')  center/cover no-repeat;
-  height: 30vh;
+/* Flex container to center form vertically */
+.verify-container {
+  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: white;
-  text-align: center;
+  align-items: center;
   padding: 2rem;
 }
 
-.hero-content h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
+/* Form Section */
+.verify-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.verify-section h2 {
+  font-size: 32px;
+  color: rgb(66, 66, 66);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
   margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.hero-content p {
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto;
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
-/* Sections */
+/* Button */
+button {
+  width: 100%;
+  background-color: #2563eb;
+  color: wh
+}
+
+/* Section Container */
 .verify-section,
 .signup-section,
 .login-section {
@@ -83,6 +108,70 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* Section Heading */
+.verify-section h2 {
+  font-size: 32px;
+  color: rgb(66, 66, 66);
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  background-color: #373838; /* green-600 */
+  color: white;
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #505752; /* green-700 */
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Result Box */
+.result-box {
+  padding: 1rem;
+  border: 1px solid #86efac; /* green-300 */
+  background-color: #f0fdf4; /* green-50 */
+  border-radius: 8px;
+}
+
+.result-box p {
+  margin-bottom: 0.5rem;
+}
+
+/* Admin CTA */
 .admin-cta {
   text-align: center;
   margin: 2rem auto;
@@ -131,29 +220,25 @@ body {
   color: #2563eb;
 }
 
-/* Inputs */
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
 /* Footer */
 .footer {
   background-color: rgba(0, 0, 0, 0.1);
   color: white;
   text-align: center;
   padding: 1.5rem;
-  margin-top: 3rem;
+  margin-top: auto;
+}
+.verify-heading {
+  font-size: 32px;
+  color: rgb(66, 66, 66);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.search-icon {
+  color: #2563eb;
+  font-size: 24px;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './VerifyCertificates.css';
+import './UploadCertificate.css';
 
 const UploadCertificate = () => {
   const [formData, setFormData] = useState({
@@ -46,45 +46,65 @@ const UploadCertificate = () => {
   };
 
   return (
-    <>
+    <div className="page-container">
+      {/* Navbar */}
       <nav className="navbar">
         <h1 className="logo">CertifyHub</h1>
         <div className="nav-links">
           <a href="/verify">Verify</a>
-          <a href="/admin/login">Admin Login</a>
-          <a href="/admin/signup">Admin Signup</a>
         </div>
       </nav>
 
-      <section id="upload" className="verify-section">
-        <h2 className="text-2xl font-bold mb-4 text-center">Upload Certificate</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
-          {['certificateId', 'studentName', 'courseName', 'issueDate'].map((field) => (
-            <input
-              key={field}
-              type={field === 'issueDate' ? 'date' : 'text'}
-              name={field}
-              value={formData[field]}
-              onChange={handleChange}
-              placeholder={field}
-              className="w-full p-3 border rounded"
-              required
-            />
-          ))}
-          <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-            Submit
-          </button>
+      {/* Upload Form */}
+      <section className="verify-section">
+        <h2>Upload Certificate</h2>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="certificateId"
+            value={formData.certificateId}
+            onChange={handleChange}
+            placeholder="Certificate ID"
+            required
+          />
+          <input
+            type="text"
+            name="studentName"
+            value={formData.studentName}
+            onChange={handleChange}
+            placeholder="Student Name"
+            required
+          />
+          <input
+            type="text"
+            name="courseName"
+            value={formData.courseName}
+            onChange={handleChange}
+            placeholder="Course Name"
+            required
+          />
+          <input
+            type="date"
+            name="issueDate"
+            value={formData.issueDate}
+            onChange={handleChange}
+            required
+          />
+
+          <button type="submit">Submit</button>
         </form>
 
         {message && (
-          <p className="mt-4 text-center text-green-700 font-medium">{message}</p>
+          <p className="message-success">{message}</p>
         )}
       </section>
 
+      {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} CertifyHub. All rights reserved.</p>
       </footer>
-    </>
+    </div>
   );
 };
 

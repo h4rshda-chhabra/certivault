@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './VerifyCertificates.css';
+import './VerifyCertificates.css'; // Uses shared CSS
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -41,28 +41,28 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div className="page-container">
       {/* Navbar */}
       <nav className="navbar">
         <h1 className="logo">CertifyHub</h1>
         <div className="nav-links">
           <a href="/verify">Verify</a>
-          <a href="/upload">Upload</a>
           <a href="/admin/login">Login</a>
         </div>
       </nav>
 
       {/* Signup Form */}
-      <section className="verify-section">
-        <h2 className="text-2xl font-bold mb-4 text-center">Admin Signup</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+      <section className="login-section">
+        <h2 className="verify-heading">Admin Signup</h2>
+        <br />
+        
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
-            name="name" // ✅ must match backend
+            name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Organization Name"
-            className="w-full p-3 border rounded"
             required
           />
           <input
@@ -71,23 +71,20 @@ const Signup = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
-            className="w-full p-3 border rounded"
             required
           />
-          <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-            Sign Up
-          </button>
+          <button type="submit">Sign Up</button>
         </form>
 
-        {error && <p className="mt-4 text-center text-red-600 font-medium">{error}</p>}
-        {success && <p className="mt-4 text-center text-green-600 font-medium">{success}</p>}
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="message-success">{success}</p>}
       </section>
 
       {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} CertifyHub. All rights reserved.</p>
       </footer>
-    </>
+    </div>
   );
 };
 

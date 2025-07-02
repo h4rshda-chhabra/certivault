@@ -1,90 +1,147 @@
+/* Base Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #3f62a7, #1e3a8a);
+  color: #333;
+}
+
+/* Container Layout */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* Navbar */
 .navbar {
-  background-color: #2a2f45;
-  color: white;
-  padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-.navbar .logo {
+.logo {
+  color: white;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.nav-links a {
+.nav-links a,
+.verifyButton {
   color: white;
-  margin-left: 24px;
   text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid white;
+  border-radius: 4px;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+.verifyButton:hover {
+  background-color: white;
+  color: #1e3a8a;
 }
 
-/* Login Form */
-.login-section {
-  background-color: #ffffff;
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 32px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-section h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
+/* Section (Form Styling) */
+.verify-section {
+  background: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.login-section input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
+.verify-section h2 {
+  font-size: 32px;
+  color: rgb(66, 66, 66);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
-.login-section button {
+/* Inputs */
+input[type="text"],
+input[type="password"] {
   width: 100%;
-  padding: 12px;
-  margin-top: 20px;
-  background-color: #2a7be4;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Button */
+button {
+  width: 100%;
+  background-color: #2563eb;
   color: white;
-  font-weight: 600;
+  padding: 12px;
+  font-size: 1rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.login-section button:hover {
-  background-color: #1f63c7;
+button:hover {
+  background-color: #1d4ed8;
 }
 
-.login-section .error-message {
+/* Error */
+.error-message {
   color: red;
-  text-align: center;
-  margin-top: 12px;
-}
-
-.login-section .success-message {
-  color: green;
-  text-align: center;
-  margin-top: 12px;
+  font-weight: 500;
+  margin-top: 1rem;
 }
 
 /* Footer */
 .footer {
-  margin-top: 60px;
-  padding: 20px 0;
-  background-color: #f3f3f3;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
   text-align: center;
-  font-size: 14px;
-  color: #555;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 2rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+
+  .verify-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .verify-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .verifyButton {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
 }

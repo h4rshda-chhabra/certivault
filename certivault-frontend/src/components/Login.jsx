@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './VerifyCertificates.css'; // Reuse shared styles
+import './Login.css'; // Reuse shared layout
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '', // ✅ MUST match backend schema field (not organizationName)
+    name: '',
     password: ''
   });
   const [error, setError] = useState('');
@@ -27,7 +27,7 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem('token', data.token); // ✅ Store token for upload auth
+        localStorage.setItem('token', data.token);
         navigate('/upload');
       } else {
         setError(data.message || 'Invalid credentials');
@@ -39,28 +39,25 @@ const Login = () => {
   };
 
   return (
-    <>
-      {/* Navbar */}
+    <div className="page-container">
       <nav className="navbar">
         <h1 className="logo">CertifyHub</h1>
         <div className="nav-links">
-          <a href="/verify">Verify</a>
-          <a href="/upload">Upload</a>
-          <a href="/admin/signup">Signup</a>
+          <a href="/verify" className="verifyButton">
+            Verify Certificates
+          </a>
         </div>
       </nav>
 
-      {/* Login Form */}
       <section className="verify-section">
-        <h2 className="text-2xl font-bold mb-4 text-center">Admin Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+        <h2>Admin Login</h2>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
-            name="name" // ✅ Correct field
+            name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Organization Name"
-            className="w-full p-3 border rounded"
             required
           />
           <input
@@ -69,22 +66,17 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
-            className="w-full p-3 border rounded"
             required
           />
-          <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-            Log In
-          </button>
+          <button type="submit">Log In</button>
         </form>
-
-        {error && <p className="mt-4 text-center text-red-600 font-medium">{error}</p>}
+        {error && <p className="error-message">{error}</p>}
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} CertifyHub. All rights reserved.</p>
       </footer>
-    </>
+    </div>
   );
 };
 
